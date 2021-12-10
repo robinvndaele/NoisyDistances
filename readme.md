@@ -42,4 +42,4 @@ section of the main paper, with files named accordingly.
 * Cell --> Run Cells (ctrl + enter).
 
 ## Results
-* Folder "Output": contains all output by code block in PDF format, with files named accordingly.
+* Folder "OutputPDF": contains all output by code block in PDF format, with files named accordingly.
