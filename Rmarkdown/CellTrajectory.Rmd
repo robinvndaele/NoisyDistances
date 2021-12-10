@@ -1,0 +1,92 @@
+---
+title: "CellTrajectory"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+knitr::opts_knit$set(root.dir="/home/robin/Documents/Conferences/AISTATS/2022/Code")
+```
+
+Load libraries
+
+``` {r, warning=FALSE, message=FALSE}
+library("ggplot2") # general plotting
+library("igraph") # working with graphs
+library("ggpubr") # combining plots
+```
+
+Load functions
+
+``` {r, warning=FALSE, message=FALSE}
+source("R/kNNgraph.R")
+source("R/get_edges2D.R")
+```
+
+Load the data
+
+``` {r}
+cells_info <- readRDS("Data/cellbench-SC1_luyitian.rds")
+```
+
+View the ground truth model
+
+``` {r, fig.width=4, fig.height=4, fig.align="center"}
+G <- graph_from_data_frame(cells_info$milestone_network)
+cols <- c("H1975"=rgb(250, 127, 113, maxColorValue = 255),
+          "HCC827"=rgb(178, 221, 104, maxColorValue = 255),
+          "H2228"=rgb(254, 254, 178, maxColorValue = 255),
+          "H1975,H2228,HCC827"=rgb(252, 179, 97, maxColorValue = 255))
+V(G)$color <- cols
+op <- par(mar = c(0, 0, 0, 0))
+plot(G, vertex.shape="rectangle", vertex.label.cex=1, vertex.size=c(75, 75, 75, 150),
+     edge.arrow.size=0.25, edge.color="black"); par(op)
+```
+
+View the kNN graph of the high-dimensional data through a low-dimensional embedding
+
+``` {r}
+fit <- data.frame(prcomp(cells_info$expression, rank.=2)$x)
+fit[["group"]] <- factor(cells_info$grouping)
+if(mean(fit[fit[["group"]] == "HCC827", 1]) > 0){
+  fit[,1] <- -fit[,1]
+}
+if(mean(fit[fit[["group"]] == "H2228", 2]) < 0){
+  fit[,2] <- -fit[,2]
+}
+kNNhigh <- kNNgraph(cells_info$expression, k=5)
+Ehigh <- get_edges2D(fit[,1:2], kNNhigh)
+
+P1 <- ggplot(fit, aes(x=PC1, y=PC2)) +
+  geom_segment(data=Ehigh, aes(x=x1, y=y1, xend=x2, yend=y2), color='black', alpha=0.15) +
+  geom_point(size=3, col="black", aes(fill=group), pch=21) +
+  scale_colour_manual(values=cols, aesthetics="fill") +
+  ggtitle("high-dimensional 5NN") +
+  theme_bw() +
+  theme(legend.title=element_text(size=15, face="bold"), legend.text=element_text(size=12),
+        text=element_text(size=10), plot.title=element_text(hjust = 0.5, size=12),
+        legend.position="none")
+```
+
+View the kNN graph of the low-dimensional embedding
+
+``` {r}
+kNNlow <- kNNgraph(fit[,1:2], k=5)
+Elow <- get_edges2D(fit[,1:2], kNNlow)
+
+P2 <- ggplot(fit, aes(x=PC1, y=PC2)) +
+  geom_segment(data=Elow, aes(x=x1, y=y1, xend=x2, yend=y2), color='black', alpha=0.75) +
+  geom_point(size=3, col="black", aes(fill=group), pch=21) +
+  scale_colour_manual(values=cols, aesthetics="fill") +
+  theme_bw() +
+  ggtitle("low-dimensional 5NN") +
+  theme(legend.title=element_text(size=15, face="bold"), legend.text=element_text(size=12),
+        text=element_text(size=10), plot.title=element_text(hjust = 0.5, size=12),
+        legend.position="none")
+```
+
+Combine the plots
+
+``` {r, fig.width=6, fig.height=3, fig.align="center"}
+ggarrange(P1, P2, ncol=2)
+```
