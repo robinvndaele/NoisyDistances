@@ -158,7 +158,7 @@ P4 <- ggplot(data=cors_rpca, aes(x=dim, y=cor, color=factor(size))) +
 ### We study how high-dimensional noise affects the robust PCA dimensionality reduction ###
 ### The experiments are conducted in Python and the results are loaded in R for plotting ###
 
-cors_auto <- read.table("Results/Size/AUTO_alpha2.csv", # load the results
+cors_auto <- read.table("Results/Size/AUTO_alpha3.csv", # load the results
                         sep=",", row.names=1, header=TRUE)
 P5 <- ggplot(data=cors_auto, aes(x=dim, y=cor, color=factor(size))) +
   geom_line() +
