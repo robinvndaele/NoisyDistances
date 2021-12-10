@@ -96,7 +96,8 @@ P1 <- ggplot(data=cors_pca, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("PCA") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P1
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P1
 
 ### We study how high-dimensional noise affects the UMAP dimensionality reduction ###
 
@@ -128,7 +129,8 @@ P2 <- ggplot(data=cors_umap, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("UMAP") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P2
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P2
 
 ### We study how high-dimensional noise affects the diffusion map dimensionality reduction ###
 
@@ -157,7 +159,8 @@ P3 <- ggplot(data=cors_diff, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("DiffusionMap") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P3
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P3
 
 ### We study how high-dimensional noise affects the robust PCA dimensionality reduction ###
 
@@ -187,7 +190,8 @@ P4 <- ggplot(data=cors_rpca, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("Robust PCA") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P4
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P4
 
 ### We study how high-dimensional noise affects the robust PCA dimensionality reduction ###
 ### The experiments are conducted in Python and the results are loaded in R for plotting ###
@@ -202,7 +206,8 @@ P5 <- ggplot(data=cors_auto, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("AutoEncoder") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P5
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P5
 
 ### We study how high-dimensional noise affects the Isomap dimensionality reduction ###
 
@@ -231,7 +236,8 @@ P6 <- ggplot(data=cors_iso, aes(x=dim, y=cor, color=factor(alpha))) +
   labs(col="alpha") +
   ggtitle("Isomap") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P6
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P6
 
 ### Finally, we combine the plots for comparison ###
 

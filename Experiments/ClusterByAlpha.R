@@ -34,15 +34,17 @@ PlotList <- list() # empty list for storing plots
 N <- matrix(rnorm(2 * maxdim * npoints, sd=sigma), ncol=maxdim) # noise matrix identical for all data
 for(alpha_idx in 1:length(alphas)){
   # compute clustering and visualizations for this growth rate determined by alpha (noise-free)
+  if(maxdim >= 1000) stringdim <- paste0(maxdim / 1000, "k") else stringdim <- as.character(maxdim)
   thisX <- datasets[[alpha_idx]]
   thisX$pred <- factor(Spectrum(data.frame(t(thisX)), maxk=2, # compute spectral clustering 
                                 silent=TRUE, showres=FALSE)$assignments)
   PlotList[[length(PlotList) + 1]] <- ggplot(data=thisX, # compute and store plot
                                              aes(x=X1, y=X2, fill=pred)) +
-    geom_point(size=3, aes(shape=group)) +
-    ggtitle(paste0("without noise \n alpha = ", alphas[alpha_idx], ", dim = ", maxdim)) +
+    geom_point(size=5, aes(shape=group)) +
+    ggtitle(paste0("without noise \n alpha = ", alphas[alpha_idx], ", dim = ", stringdim)) +
     theme_bw() +
-    theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)) +
+    theme(text=element_text(size=13), plot.title=element_text(hjust=0.5, size=17),
+          legend.title=element_text(size=20), legend.text=element_text(size=20)) + 
     scale_fill_manual(values=c("#F8766D", "#00BFC4")) +
     scale_shape_manual(values=c(21, 24)) +
     labs(fill="predicted cluster", shape="true cluster") +
@@ -53,14 +55,16 @@ for(alpha_idx in 1:length(alphas)){
   for(dim in dims){
     thisX <- XN[,1:dim]
     # compute clustering and visualization for this growth rate and dimension (noisy)
+    if(dim >= 1000) stringdim <- paste0(dim / 1000, "k") else stringdim <- as.character(dim)
     thisX$pred <- factor(Spectrum(data.frame(t(thisX)), maxk=2, # compute spectral clustering 
                                  silent=TRUE, showres=FALSE)$assignments)
     PlotList[[length(PlotList) + 1]] <- ggplot(data=thisX, # compute and store plot
                                                aes(x=X1, y=X2, fill=pred)) +
-      geom_point(size=3, aes(shape=group)) +
-      ggtitle(paste0("with noise \n alpha = ", alphas[alpha_idx], ", dim = ", dim)) +
+      geom_point(size=5, aes(shape=group)) +
+      ggtitle(paste0("with noise \n alpha = ", alphas[alpha_idx], ", dim = ", stringdim)) +
       theme_bw() +
-      theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)) + 
+      theme(text=element_text(size=13), plot.title=element_text(hjust=0.5, size=17),
+            legend.title=element_text(size=20), legend.text=element_text(size=20)) + 
       scale_fill_manual(values=c("#F8766D", "#00BFC4")) +
       scale_shape_manual(values=c(21, 24)) +
       labs(fill="predicted cluster", shape="true cluster") +
