@@ -1,6 +1,6 @@
 This folder contains the Appendix for arxiv submission https://arxiv.org/abs/2109.10569: 
 
-_The Curse Revisited:  When are Distances Informative for theGround Truth in Noisy High-Dimensional Data?_
+_The Curse Revisited:  When are Distances Informative for the Ground Truth in Noisy High-Dimensional Data?_
 
 ## Setup
 
