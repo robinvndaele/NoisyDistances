@@ -22,9 +22,9 @@ group <- factor(c(rep(1, npoints), rep(2, npoints)))
 datasets <- lapply(alphas, function(alpha){
   if(alpha==Inf) center <- rep(1, maxdim) else center <- (1:maxdim)**(-1 / alpha)
   center[1:2] <- 5 * center[1:2]
-  S1 <- (norm(center, type="2") / 4) * runif(npoints) * hypersphere.sample(maxdim, npoints)
+  S1 <- (norm(center, type="2") / 5) * runif(npoints) * hypersphere.sample(maxdim, npoints)
   S2 <- t(replicate(npoints, center)) + 
-    (norm(center, type="2") / 4) * runif(npoints) * hypersphere.sample(maxdim, npoints)
+    (norm(center, type="2") / 5) * runif(npoints) * hypersphere.sample(maxdim, npoints)
   data.frame(rbind(S1, S2))
 })
 
