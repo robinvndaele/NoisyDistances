@@ -5,7 +5,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE)
-knitr::opts_knit$set(root.dir="/home/robin/Documents/Conferences/AISTATS/2022/Code/Code")
+knitr::opts_knit$set(root.dir="/home/robin/Documents/Conferences/AISTATS/2022/Code")
 ```
 
 Load libraries

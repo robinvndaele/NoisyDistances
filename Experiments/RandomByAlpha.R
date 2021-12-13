@@ -46,7 +46,8 @@ P1 <- ggplot(data=diams, aes(x=dim, y=diam)) +
   labs(linetype="") +
   scale_linetype_manual(name="noise", labels=c("expected"), values=2) +
   theme_classic() +
-  theme(text=element_text(size=10)); P1
+  theme(text=element_text(size=12), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P1
 
 ### Investigate the relative discrimination between furthest and closest points ###
 
@@ -74,7 +75,8 @@ P2 <- ggplot(data=ratios, aes(x=dim, y=discrimination)) +
   ylab("relative contrast") +
   labs(col="alpha") +
   theme_classic() +
-  theme(text=element_text(size=10)); P2
+  theme(text=element_text(size=12), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P2
 
 ### We study how high-dimensional noise results in closest/furthest neighbors becoming random ###
 
@@ -105,7 +107,8 @@ P3 <- ggplot(data=P, aes(x=dim, y=P, color=factor(alpha))) +
   ylab("probability") +
   labs(col="alpha") +
   theme_classic() +
-  theme(text=element_text(size=10), plot.title=element_text(hjust=0.5, size=12)); P3
+  theme(text=element_text(size=12), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20)); P3
 
 ### Finally, we visually compare the obtained plots ###
 
