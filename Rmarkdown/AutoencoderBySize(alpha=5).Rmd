@@ -1,0 +1,34 @@
+---
+title: "DimredBySize"
+output: pdf_document
+---
+
+Due to the required computation time, the code for computing the dimensionality reduction performances is commented out. The obtained results are stored in the "Results" folder. The results are then loaded back into R for plotting.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+knitr::opts_knit$set(root.dir="/home/robin/Documents/Conferences/AISTATS/2022/Code")
+```
+
+Load libraries
+
+``` {r, warning=FALSE, message=FALSE}
+library("ggplot2") # general plotting
+```
+
+We study how high-dimensional noise affects the autoencoder dimensionality reduction 
+
+``` {r}
+cors_auto <- read.table("Results/Size/AUTO_alpha5.csv", # load the results
+                        sep=",", row.names=1, header=TRUE)
+ggplot(data=cors_auto, aes(x=dim, y=cor, color=factor(size))) +
+  geom_line() +
+  geom_point() +
+  scale_x_log10() +
+  ylab("correlation") +
+  labs(col="data size") +
+  ggtitle("AutoEncoder") +
+  theme_classic() +
+  theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
+        legend.title=element_text(size=20), legend.text=element_text(size=20))
+```
