@@ -1,4 +1,4 @@
-This folder contains the Code for _'The Curse Revisited:  When are Distances Informative for the Ground Truth in Noisy High-Dimensional Data?'_, that will be presented at The 25th International Conference on Artificial Intelligence and Statistics (AISTATS), 2022.
+This folder contains the code for _'The Curse Revisited:  When are Distances Informative for the Ground Truth in Noisy High-Dimensional Data?'_, that will be presented at The 25th International Conference on Artificial Intelligence and Statistics (AISTATS), 2022.
 
 arxiv submission: https://arxiv.org/abs/2109.10569
 
