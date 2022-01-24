@@ -30,5 +30,5 @@ ggplot(data=cors_auto, aes(x=dim, y=cor, color=factor(size))) +
   ggtitle("AutoEncoder") +
   theme_classic() +
   theme(text=element_text(size=15), plot.title=element_text(hjust=0.5, size=15),
-        legend.title=element_text(size=20), legend.text=element_text(size=20))
+        legend.title=element_text(size=12), legend.text=element_text(size=10))
 ```
